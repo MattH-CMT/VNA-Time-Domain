@@ -287,3 +287,23 @@ class VNA_TDR:
     #             if error < low_error:
     #                 index2 = i
     #                 low_error = error 
+     
+     #     #Set all the points outside of the range selected to 0
+    #     if(notch == 0):#Bandpass
+    #         if(index1 == 0):
+    #             array = np.linspace(index2, len(x0), len(x0) - index2 + 1)
+    #             for i in range(len(array)):
+    #                 x1[array[i]] = 0
+    #         else:
+    #             array1 = np.linspace(0, index1, index1 + 1)
+    #             array2 = np.linspace(index2, len(x0), len(x0) - index2 + 1)
+    #             for i in range(len(array1)):
+    #                 x1[array1[i]] = 0
+    #             for i in range(len(array2)):
+    #                 x1[array2[i]] = 0
+    #     else:#notch, set all of the points inside of the range selected to 0
+    #         array = np.linspace(index1, index2, index2 - index1 + 1)
+    #         for i in range(len(array)):
+    #             x1[array[i]] = 0
+    
+    #     return x0, x1

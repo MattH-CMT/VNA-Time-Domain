@@ -223,7 +223,7 @@ class VNA_TDR:
         else:
             self.refType = 1
  
-def toggleStep(self):#Toggles the scaling for both the step and impulse lowpass response, this function is just used internally
+     def toggleStep(self):#Toggles the scaling for both the step and impulse lowpass response, this function is just used internally
         if(self.Step == 1):
             self.Step = 0
         elif(self.Step == 0):

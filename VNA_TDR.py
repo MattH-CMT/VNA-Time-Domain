@@ -5,10 +5,6 @@
 #https://github.com/garrettj403/CZT Chirp Z library used
 #Written by Matt Huebner
 
-#Things to remember
-#1. Frequency data must be harmonically related, which is important for lowpass impulse and step
-#2. Use a large Frequency sweep with lots of points
-
 import numpy as np
 import czt
 class VNA_TDR:
@@ -226,84 +222,9 @@ class VNA_TDR:
             self.refType = reflection
         else:
             self.refType = 1
-           
-            
-    #Sets a cable loss in dB / m for post processing data. The function returns data in linear mag
-    #Currently broken        
-    # def setCableLoss(self, t, x, loss):
-    #     x = 20*np.log10(x)
-    #     if(self.unit == "seconds"):
-    #         t = t * 2.9979e8
-    #         for i in range(len(x)):
-    #             x[i] = x[i] + loss*t[i]
-    #     if(self.unit == "feet"):
-    #         t = t * 0.3048
-    #         for i in range(len(x)):
-    #             x[i] = x[i] + loss*t[i]
-    #     if(self.unit == "meters"):
-    #         for i in range(len(x)):
-    #             x[i] = x[i] + loss*t[i]
-                
-    #     x = 10**(x/20)
-    #     return x
-
-
-    def toggleStep(self):#Toggles the scaling for both the step and impulse lowpass response, this function is just used internally
+ 
+def toggleStep(self):#Toggles the scaling for both the step and impulse lowpass response, this function is just used internally
         if(self.Step == 1):
             self.Step = 0
         elif(self.Step == 0):
             self.Step = 1
-
-    # def gate(self, x0, x1, G1, G2, notch = 0):
-    #     #This function will search through the input time domain array and find the points nearest to G1 and G2 to be windowed
-    #     #It will then either apply a notch or bandpass window, needs to be a FIR filter some sinc applied to the the frequency domain I think
-    #     #G2 must be greater than G1
-    #     if(G1 == G2):
-    #         print("error G1 = G2")
-    #         return
-    #     elif(G1 > G2):
-    #         print("error G1 > G2")
-    #         return
-    
-    #     #The next few lines find the closest point to the selected point for G1
-    #     error = 0
-    #     low_error = 1
-    #     index1 = 0
-    #     if(G1 == 0):
-    #         index1 = G1
-    #     else:
-    #         for i in range(len(x0)):
-    #             error = abs((G1 - x0[i])/G1)
-    #             if error < low_error:
-    #                 index1 = i
-    #                 low_error = error     
-
-    #     #The next few lines find the closest point to the selected point for G2
-    #     error = 0
-    #     low_error = 1
-    #     index2 = 0 
-    #     for i in range(len(x0)):
-    #             error = abs((G2 - x0[i])/G1)
-    #             if error < low_error:
-    #                 index2 = i
-    #                 low_error = error 
-     
-     #     #Set all the points outside of the range selected to 0
-    #     if(notch == 0):#Bandpass
-    #         if(index1 == 0):
-    #             array = np.linspace(index2, len(x0), len(x0) - index2 + 1)
-    #             for i in range(len(array)):
-    #                 x1[array[i]] = 0
-    #         else:
-    #             array1 = np.linspace(0, index1, index1 + 1)
-    #             array2 = np.linspace(index2, len(x0), len(x0) - index2 + 1)
-    #             for i in range(len(array1)):
-    #                 x1[array1[i]] = 0
-    #             for i in range(len(array2)):
-    #                 x1[array2[i]] = 0
-    #     else:#notch, set all of the points inside of the range selected to 0
-    #         array = np.linspace(index1, index2, index2 - index1 + 1)
-    #         for i in range(len(array)):
-    #             x1[array[i]] = 0
-    
-    #     return x0, x1
